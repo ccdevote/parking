@@ -93,4 +93,19 @@ public class Order {
     public void setGmtModify(Date gmtModify) {
         this.gmtModify = gmtModify;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", orderId='" + orderId + '\'' +
+                ", carNo='" + carNo + '\'' +
+                ", enterTime=" + enterTime +
+                ", outTime=" + outTime +
+                ", fee=" + fee +
+                ", status=" + status +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModify=" + gmtModify +
+                '}';
+    }
 }

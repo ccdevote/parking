@@ -16,14 +16,10 @@ public class DispatcherServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (req.getRequestURI().startsWith("/parking")) {
-            OutputStream out = resp.getOutputStream();
-            OutputStreamWriter writer = new OutputStreamWriter(out);
-            writer.write("welcome to lin's parking.");
-            writer.flush();
-        } else {
-            super.doGet(req, resp);
-        }
+        OutputStream out = resp.getOutputStream();
+        OutputStreamWriter writer = new OutputStreamWriter(out);
+        writer.write("welcome to lin's parking.");
+        writer.flush();
     }
 
     @Override

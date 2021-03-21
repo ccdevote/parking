@@ -1,17 +1,8 @@
 package com.parking.service;
 
-public class ParkingService {
+import com.parking.bean.Order;
 
-    ParkingService() {
-        super();
-        try {
-            super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-    }
-    public static void main(String[] args) {
-        Object object;
-        Integer i = 1;
-    }
+public interface ParkingService {
+
+    Order enter(String carNo);
 }

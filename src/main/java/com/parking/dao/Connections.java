@@ -23,20 +23,22 @@ public class Connections {
             LOGGER.error("加载数据库驱动失败.", e);
             throw new RuntimeException(e);
         }
-        try {
+        /*try {
             init();
         } catch (DaoException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 
     public static void init() throws DaoException {
+        Connection conn = null;
+        Statement statement = null;
         try {
             InputStream in = Collections.class.getResourceAsStream("/init.sql");
             String initSql = CharStreams.toString(new InputStreamReader(in));
             LOGGER.info("执行数据库初始化, SQL: {}", initSql);
-            Connection conn = getConnection();
-            Statement statement = conn.createStatement();
+            conn = getConnection();
+            statement = conn.createStatement();
             boolean isSuccess = statement.execute(initSql);
             if (!isSuccess) {
                 LOGGER.error("初始数据库失败.");
@@ -48,6 +50,21 @@ public class Connections {
         } catch (SQLException e) {
             LOGGER.error("SQL执行失败.", e);
             throw new DaoException("SQL执行失败.", e);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    throw new DaoException("关闭statement失败.", e);
+                }
+            }
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new DaoException("关闭Connection失败.", e);
+                }
+            }
         }
 
     }
